@@ -11,7 +11,8 @@ import axios from 'axios';
 import { orderService } from '../services/orderService';
 
 // This is your test publishable API key.
-const stripePromise = loadStripe('pk_test_51S138IDYMGZhPs3XBRT4safuwzWsz9DI0QWhOkMwq59FDsH1iJPem5pidERJmXkae7CrvizhUFJ9P0Eg99HQ1Kpo006brAorF9');
+//const stripePromise = loadStripe('');
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
 const CheckoutForm: React.FC = () => {
   const stripe = useStripe();

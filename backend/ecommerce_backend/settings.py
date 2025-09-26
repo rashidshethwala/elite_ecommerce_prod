@@ -144,6 +144,12 @@ ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
 ]
+# Make sure you're using HTTPS in production
+SECURE_SSL_REDIRECT = True if 'RENDER' in os.environ else False
+
+# If you're using environment variables
+if 'RENDER' in os.environ:
+    ALLOWED_HOSTS.append(os.environ.get('RENDER_EXTERNAL_HOSTNAME'))
 
 CORS_ALLOW_CREDENTIALS = True
 
