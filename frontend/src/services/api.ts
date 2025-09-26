@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'http://localhost:8000/api';
+//const API_BASE_URL = 'http://localhost:8000/api';
+const API_BASE_URL = 'https://elite-ecommerce-prod.onrender.com/api';
 
 // Create axios instance
 const api = axios.create({
@@ -24,20 +25,20 @@ api.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config;
-    
+
     if (error.response?.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
-      
+
       const refreshToken = localStorage.getItem('refresh_token');
       if (refreshToken) {
         try {
           const response = await axios.post(`${API_BASE_URL}/auth/token/refresh/`, {
             refresh: refreshToken,
           });
-          
+
           const { access } = response.data;
           localStorage.setItem('access_token', access);
-          
+
           return api(originalRequest);
         } catch (refreshError) {
           localStorage.removeItem('access_token');
@@ -47,7 +48,7 @@ api.interceptors.response.use(
         }
       }
     }
-    
+
     return Promise.reject(error);
   }
 );
