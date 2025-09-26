@@ -139,6 +139,7 @@ CORS_ALLOWED_ORIGINS = [
 ]
 ALLOWED_HOSTS = [
     'elite-ecommerce-prod.onrender.com',
+    'elite-ecommerce-prod-1.onrender.com',
     'localhost',
     '127.0.0.1',
 ]
